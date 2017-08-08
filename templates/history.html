@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% from "dicebear.html" import dicebear %}
+
+{% macro detail_table(transactions) %}
+  <table>
+    <tr>
+      <th>
+        Date
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Amount
+      </th>
+    </tr>
+    {% for transaction in transactions %}
+      <tr>
+        <td>
+          {{transaction.borrow_date.strftime('%d/%m/%Y at %H:%M')}}
+        </td>
+        <td>
+          {{transaction.description}}
+        </td>
+        <td>
+          {{transaction.amount}}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endmacro %}
+
+{% block content %}
+  <h1>History for {{left.name}} {{dicebear(left)}} and {{right.name}} {{dicebear(right)}}</h1>
+
+  <h2>Total of {{total}}</h2>
+
+  <h2>{{left.name}} lends {{right.name}}</h2>
+  {{ detail_table(lends) }}
+
+  <h2>{{right.name}} lends {{left.name}}</h2>
+  {{ detail_table(borrows) }}
+
+{% endblock content %}

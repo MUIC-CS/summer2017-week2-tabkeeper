@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% from "dicebear.html" import dicebear %}
+
+{% block content %}
+
+<h1>Users</h1>
+<ul>
+  {% for person in people %}
+    <li>
+      <a href="{{url_for('profile', name=person.name)}}">
+        {{dicebear(person)}}
+        {{person.name}}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% from "dicebear.html" import dicebear %}
+
+{% macro lender_form(lender, others) %}
+  <form action='/lend' method="POST">
+    <input type="hidden" value="{{lender.name}}" name="lender" />
+    <label for="amount">Lend Amount</label>
+    <input type="number" step="0.01" min="0" name="amount"/>
+    <label for="description"/>
+    <input type="text" name="description" />
+    <label for="to">To</label>
+    <select name="to">
+      {% for other in others if other.id!=lender.id %}
+      <option value="{{other.name}}">
+        {{other.name}}
+      </option>
+      {% endfor %}
+    </select>
+    <input type="submit" value="Lend"/>
+  </form>
+{% endmacro %}
+
+{% macro detail_table(summaries) %}
+  <table>
+    <tr>
+      <th>
+
+      </th>
+      <th>
+        Name
+      </th>
+      <th>
+        Total Lend(+)/Owe(-)
+      </th>
+    </tr>
+    {% for summary in summaries %}
+    <tr>
+      <td>
+        {{dicebear(summary.other)}}
+      </td>
+      <td>
+        <a href="{{url_for('history', left=lender.name, right=summary.other.name)}}">
+        {{summary.other.name}}
+      </a>
+      </td>
+      <td>
+        {{summary.total}}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endmacro %}
+
+{% block content %}
+  <h1>Profile for {{lender.name}}</h1>
+  {{ lender_form(lender, others) }}
+
+  {{ detail_table(summaries) }}
+{% endblock content %}

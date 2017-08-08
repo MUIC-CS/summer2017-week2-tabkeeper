@@ -1,0 +1,3 @@
+{% macro dicebear(person) %}
+  <img src="https://avatars.dicebear.com/v1/{{person.sex_string()|urlencode}}/{{person.name|urlencode}}/50.png" />
+{% endmacro %}
