@@ -1,6 +1,6 @@
 from person import PeopleRepo
 from borrowal import BorrowalRepo
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, abort
 
 app = Flask('TabKeeper')
 
@@ -73,6 +73,7 @@ def lend():
 
 def abort_400(msg):
     print 'Abort 400: %s' % msg
+    abort(400)
 
 
 if __name__ == '__main__':
