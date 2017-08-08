@@ -5,8 +5,11 @@ services:
     depends_on:
       - db
     ports:
-      - "5000:5000"
-
+      - "6352:5000"
+    environment:
+      - VIRTUAL_HOST=week2-pp.piti.me
+      - LETSENCRYPT_HOST=week2-pp.piti.me
+      - LETSENCRYPT_EMAIL=piti118@gmail.com
   db:
     image: "postgres:9-alpine"
     environment:
@@ -14,3 +17,4 @@ services:
       - POSTGRES_PASSWORD_FILE=/secret
     volumes:
      - ${PWD}/secret:/secret:ro
+
