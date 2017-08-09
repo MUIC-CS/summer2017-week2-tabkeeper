@@ -8,8 +8,12 @@ env = os.getenv('TABKEEPER_ENV', 'development')
 
 
 def get_password():
-    with open('secret') as f:
-        return f.read().strip()
+    try:
+        with open('secret') as f:
+            return f.read().strip()
+    except FileNotFoundError as e:
+        print 'WARNING: secret file not found assuming empty'
+        return ''
 
 
 setting = {
