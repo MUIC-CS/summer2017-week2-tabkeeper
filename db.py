@@ -11,7 +11,7 @@ def get_password():
     try:
         with open('secret') as f:
             return f.read().strip()
-    except FileNotFoundError as e:
+    except IOError as e:
         print 'WARNING: secret file not found assuming empty'
         return ''
 
