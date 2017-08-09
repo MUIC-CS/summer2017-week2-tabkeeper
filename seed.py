@@ -32,8 +32,8 @@ def test():
 
 
 if __name__ == '__main__':
-    PeopleRepo.clear_table()
-    BorrowalRepo.clear_table()
+    PeopleRepo.delete_table()
+    BorrowalRepo.delete_table()
     seed_people()
     seed_borrowal()
     test()

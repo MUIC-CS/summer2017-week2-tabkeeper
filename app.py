@@ -42,7 +42,6 @@ def history(left, right):
     right = PeopleRepo.find_by_name(right)
     if left is None or right is None:
         abort_400('person not found %s, %s' % (left_name, right_name))
-    print left.id, right.id
     lends = BorrowalRepo.find_by_lender_borrower(left, right)
     borrows = BorrowalRepo.find_by_lender_borrower(right, left)
     total = BorrowalRepo.summarize_debt(left, right)
@@ -56,7 +55,6 @@ def history(left, right):
 
 @app.route('/lend', methods=['POST'])
 def lend():
-    print request.form
     lender_name = request.form['lender']
     lender = PeopleRepo.find_by_name(lender_name)
     if lender is None:
